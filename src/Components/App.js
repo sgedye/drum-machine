@@ -9,36 +9,71 @@ const Drums = styled.div`
   min-width: 300px;
   max-width: 800px;
   margin: auto;
-  background: pink;
+  background: #222;
+  color: #fff;
+  box-shadow: inset 0px 0px 10px 2px green;
+  @media screen and (min-width: 768px) {
+    margin-top: 100px;
+  }
 `
 const Header = styled.h1`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
   margin: 0;
+  text-shadow: 3px 2px 3px green;
 `
 const Body = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  background: gray;
+  background: #444;
+  @media screen and (max-width: 425px) {
+    min-height: calc(100vh - 80px);
+  }
+  box-shadow: inset 0px 0px 10px 2px green;
+
 `
 
 function App() {
-  const [soundId, setSoundId] = useState("")
+  const [power, setPower] = useState(true)
 
-  function handleClick(newSoundId) {
-    setSoundId(newSoundId)    
-    playSound(newSoundId)
+  const handleClick = song => {
+    playSound(song.id)
+    displayName(song.title)
   }
-
-  function playSound(newSoundId) {
-    document.getElementById(newSoundId).play()
+  const handlePower = (powerOn) => {
+    setPower(powerOn)
   }
+  const handleVolume = (volume) => {
+    const songs = document.getElementsByClassName("clip")
+    for (let i=0; i<songs.length; i++) {
+      songs[i].volume = volume / 100
+    }
+  }
+  const playSound = song => {
+    if (power) {
+      const AUDIO = document.getElementById(song)
+      AUDIO.play()
+      keyPressed(AUDIO.parentElement)
+    }
+  }
+  const keyPressed = btn => {
+    const myStyle = `
+      transform: translate(1px, 1px);
+      box-shadow: none;
+    `
+    btn.setAttribute('style', myStyle)
+    setTimeout(() => btn.setAttribute('style', ''), 200)
+  }
+  const displayName = title => document.getElementById("display").innerHTML = title
   
   return (
     <Drums id="drum-machine">
-      <Header id="header">DrumKit</Header>
+      <Header id="header">Drum Kit</Header>
       <Body id="body">
-        <Drumkit handleClick={handleClick}/>
-        <Controls />
+        <Drumkit handleClick={handleClick} />
+        <Controls power={power} handleChange={handlePower} handleVolume={handleVolume} />
       </Body>
     </Drums>
   )
