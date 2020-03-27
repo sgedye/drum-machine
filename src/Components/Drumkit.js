@@ -17,9 +17,6 @@ const Button = styled.button`
   font-size: 1.5em;
   border-radius: 10px;
   box-shadow: 3px 4px 4px 0px #111;
-  &:active {
-    transform: translate(1px, 1px);
-  }
 `
 
 const DRUM_KEYS = [
