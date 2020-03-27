@@ -48,7 +48,7 @@ function Controls(props) {
         {props.power ? <p>POWER ON</p> : <p>POWER OFF</p>}
       </Label>
       <Display id="display" />
-      <Volume type="range" id="volume" name="volume" min="0" max="100" onClick={(e) => props.handleVolume(e.target.value)} />   
+      <Volume type="range" id="volume" name="volume" min="0" max="100" onChange={(e) => props.handleVolume(e.target.value)} />   
     </Selectors>
   )
 }

@@ -11,6 +11,7 @@ const Drums = styled.div`
   margin: auto;
   background: #222;
   color: #fff;
+  border-radius: 20px;
   box-shadow: inset 0px 0px 10px 2px green;
   @media screen and (min-width: 768px) {
     margin-top: 100px;
@@ -28,6 +29,7 @@ const Body = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   background: #444;
+  border-radius: 0 0 20px 20px;
   @media screen and (max-width: 425px) {
     min-height: calc(100vh - 80px);
   }
