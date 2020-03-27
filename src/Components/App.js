@@ -1,9 +1,9 @@
-import React from 'react'
-import Drumkit from './Components/Drumkit'
-import Controls from './Components/Controls'
+import React, { useState } from 'react'
+import Drumkit from './Drumkit'
+import Controls from './Controls'
 import styled from 'styled-components'
 
-import './App.css'
+import '../Style/App.css'
 
 const Drums = styled.div`
   min-width: 300px;
@@ -22,15 +22,26 @@ const Body = styled.div`
 `
 
 function App() {
+  const [soundId, setSoundId] = useState("")
+
+  function handleClick(newSoundId) {
+    setSoundId(newSoundId)    
+    playSound(newSoundId)
+  }
+
+  function playSound(newSoundId) {
+    document.getElementById(newSoundId).play()
+  }
+  
   return (
     <Drums id="drum-machine">
       <Header id="header">DrumKit</Header>
       <Body id="body">
-        <Drumkit />
+        <Drumkit handleClick={handleClick}/>
         <Controls />
       </Body>
     </Drums>
-  );
+  )
 }
 
 export default App;
