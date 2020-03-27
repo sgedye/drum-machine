@@ -37,27 +37,16 @@ const Body = styled.div`
 
 function App() {
   const [power, setPower] = useState(true)
-
   const handleClick = song => {
-    playSound(song.id)
-    displayName(song.title)
-  }
-  const handlePower = (powerOn) => {
-    setPower(powerOn)
-  }
-  const handleVolume = (volume) => {
-    const songs = document.getElementsByClassName("clip")
-    for (let i=0; i<songs.length; i++) {
-      songs[i].volume = volume / 100
-    }
-  }
-  const playSound = song => {
     if (power) {
-      const AUDIO = document.getElementById(song)
-      AUDIO.play()
-      keyPressed(AUDIO.parentElement)
+      playSound(song.id)
+      keyPressed(document.getElementById(song.title))
+      displayName(song.title)
+    } else {
+      displayName("")
     }
   }
+  const playSound = song => document.getElementById(song).play()
   const keyPressed = btn => {
     const myStyle = `
       transform: translate(1px, 1px);
@@ -65,6 +54,13 @@ function App() {
     `
     btn.setAttribute('style', myStyle)
     setTimeout(() => btn.setAttribute('style', ''), 200)
+  }
+  const handlePower = powerOn => setPower(powerOn)
+  const handleVolume = volume => {
+    const songs = document.getElementsByClassName("clip")
+    for (let i=0; i<songs.length; i++) {
+      songs[i].volume = volume / 100
+    }
   }
   const displayName = title => document.getElementById("display").innerHTML = title
   

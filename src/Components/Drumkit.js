@@ -11,7 +11,6 @@ const Drums = styled.div`
 
 const Button = styled.button`
   display: inline-block;
-  // background-image: radial-gradient(#ff0000, #ff0000, #0000ff, black);
   background-image: radial-gradient(red, darkblue);
   padding: 20px;
   font-weight: bold;
